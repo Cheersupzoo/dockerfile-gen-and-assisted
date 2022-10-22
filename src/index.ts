@@ -35,7 +35,7 @@ const createWindow = (): void => {
 // app.on("ready", createWindow);
 app.whenReady().then(() => {
   exposes.forEach(({ channel, handle }) =>
-    ipcMain.handle(channel, (_, ...arg: any[]) => handle(...arg))
+    ipcMain.handle(channel, (_, ...arg: unknown[]) => handle(...arg))
   );
   createWindow();
   app.on("activate", function () {

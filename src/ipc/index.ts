@@ -5,13 +5,10 @@ export const services: { name: string; channel: string }[] = [
   { name: "selectDirectory", channel: "dialog:selectDirectory" },
 ];
 
-
-
 export const ipcs = services.reduce(
   (pre, cur) => ({
     ...pre,
-    [cur.name]: (...arg: any[]) => ipcRenderer.invoke(cur.channel, ...arg),
+    [cur.name]: (...arg: unknown[]) => ipcRenderer.invoke(cur.channel, ...arg),
   }),
   {}
 );
-
