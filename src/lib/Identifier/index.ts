@@ -33,7 +33,7 @@ export class Identifier {
   getFrameworkSignature(
     languageSignature: LanguageSignature
   ): FrameworkSignature {
-    return languageSignature.frameworks.find((framework) =>
+    return languageSignature?.frameworks.find((framework) =>
       framework.checkFramework(this.path)
     );
   }
@@ -43,5 +43,5 @@ export async function getLanguageAndFramework(path: string, files: FileMeta[]) {
   const identifier = new Identifier(path, files);
   const language = identifier.getLanguageSignature();
   const framework = identifier.getFrameworkSignature(language);
-  return { language: language.language, framework: framework?.framework ?? "" };
+  return { language: language?.language ?? "unknown", framework: framework?.framework ?? "" };
 }

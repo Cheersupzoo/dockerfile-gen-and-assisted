@@ -7,6 +7,6 @@ export class NextJs implements FrameworkSignature {
   checkFramework(path: string) {
     const packageJson = getPackageJson(path);
 
-    return packageJson.dependencies["next"] ? true : false;
+    return packageJson.dependencies?.["next"] ? true : false;
   }
 }

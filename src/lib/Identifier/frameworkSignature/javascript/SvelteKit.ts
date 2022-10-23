@@ -1,12 +1,12 @@
 import { FrameworkSignature } from "../FrameworkSignature";
 import { getPackageJson } from "./helper";
 
-export class CreateReactApp implements FrameworkSignature {
-  framework = "create-react-app";
+export class SvelteKit implements FrameworkSignature {
+  framework = "SvelteKit";
 
   checkFramework(path: string) {
     const packageJson = getPackageJson(path);
 
-    return packageJson.dependencies?.["react-scripts"] ? true : false;
+    return packageJson.devDependencies?.["@sveltejs/kit"] ? true : false;
   }
 }

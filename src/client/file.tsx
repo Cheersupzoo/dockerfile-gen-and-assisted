@@ -35,7 +35,9 @@ export const File = () => {
       </div>
       <div>
         <button onClick={check}>Check Language and signature</button>
-        <div>{language}: {framework}</div>
+        <div>
+          {language}: {framework}
+        </div>
       </div>
       <div>
         {fileMetas.map(({ name, isDirectory }) => (
