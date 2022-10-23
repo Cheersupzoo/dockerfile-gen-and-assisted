@@ -1,8 +1,13 @@
+import { getLanguageAndFramework } from "../lib/Identifier";
 import { services } from ".";
 import { selectDirectory, scanDirectory } from "../lib/DirScanner";
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-export const handles: Function[] = [scanDirectory, selectDirectory];
+export const handles: Function[] = [
+  scanDirectory,
+  selectDirectory,
+  getLanguageAndFramework,
+];
 
 if (services.length !== handles.length)
   throw new Error("IPC not setup properly");
@@ -10,6 +15,7 @@ if (services.length !== handles.length)
 export type electronAPI = {
   selectDirectory: typeof selectDirectory;
   scanDirectory: typeof scanDirectory;
+  getLanguageAndFramework: typeof getLanguageAndFramework;
 };
 
 export const exposes = services.map(({ channel }, index) => ({

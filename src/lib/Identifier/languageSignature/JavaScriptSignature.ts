@@ -1,11 +1,11 @@
 import fg from "fast-glob";
 import { Language, LanguageSignature } from ".";
 import { FileMeta } from "../../../lib/DirScanner/type/fileMeta";
+import { javascriptFramework } from "../frameworkSignature";
 import { FrameworkSignature } from "../frameworkSignature/FrameworkSignature";
-import { CreateReactApp } from "../frameworkSignature/javascript/create-react-app";
 export class JavascriptSignature implements LanguageSignature {
   language: Language = "javascript";
-  frameworks: FrameworkSignature[] = [new CreateReactApp()];
+  frameworks: FrameworkSignature[] = javascriptFramework;
   checkLanguage(files: FileMeta[]) {
     const packageJson = files.find((files) => files.name === "package.json");
     if (packageJson) return true;
