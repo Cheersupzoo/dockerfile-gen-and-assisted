@@ -1,22 +1,22 @@
 import { getLanguageAndFramework } from "../lib/Identifier";
 import { services } from ".";
 import { selectDirectory, scanDirectory } from "../lib/DirScanner";
+import { generateDockerFile } from "../lib/Generator";
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-export const handles: Function[] = [
+const apis = {
   scanDirectory,
   selectDirectory,
   getLanguageAndFramework,
-];
+  generateDockerFile,
+};
+
+// eslint-disable-next-line @typescript-eslint/ban-types
+export const handles = Object.values(apis) as Function[];
 
 if (services.length !== handles.length)
   throw new Error("IPC not setup properly");
 
-export type electronAPI = {
-  selectDirectory: typeof selectDirectory;
-  scanDirectory: typeof scanDirectory;
-  getLanguageAndFramework: typeof getLanguageAndFramework;
-};
+export type electronAPI = typeof apis;
 
 export const exposes = services.map(({ channel }, index) => ({
   channel,
