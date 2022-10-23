@@ -4,6 +4,9 @@ import { selectDirectory, scanDirectory } from "../lib/DirScanner";
 // eslint-disable-next-line @typescript-eslint/ban-types
 export const handles: Function[] = [scanDirectory, selectDirectory];
 
+if (services.length !== handles.length)
+  throw new Error("IPC not setup properly");
+
 export type electronAPI = {
   selectDirectory: typeof selectDirectory;
   scanDirectory: typeof scanDirectory;
