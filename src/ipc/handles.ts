@@ -5,6 +5,7 @@ import { generateDockerfile } from "../lib/Generator";
 import {
   buildDockerImage,
   inspectContainer,
+  removeContainer,
   runContainer,
   stopContainer,
 } from "../lib/Docker";
@@ -18,6 +19,7 @@ const apis = {
   runContainer,
   inspectContainer,
   stopContainer,
+  removeContainer,
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-types
