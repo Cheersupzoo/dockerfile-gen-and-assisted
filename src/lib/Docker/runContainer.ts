@@ -21,9 +21,10 @@ export async function runContainer(path: string) {
   const docker = new Docker();
   const container = docker.getContainer(folder);
   try {
-    await container.stop();
     await container.remove();
   } catch (error) {
+    await container.stop();
+    await container.remove();
     console.error(error);
   }
   docker.run(
