@@ -2,12 +2,14 @@ import { getLanguageAndFramework } from "../lib/Identifier";
 import { services } from ".";
 import { selectDirectory, scanDirectory } from "../lib/DirScanner";
 import { generateDockerfile } from "../lib/Generator";
+import { buildDockerImage } from "../lib/Docker";
 
 const apis = {
   scanDirectory,
   selectDirectory,
   getLanguageAndFramework,
   generateDockerfile,
+  buildDockerImage,
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -16,7 +18,12 @@ export const handles = Object.values(apis) as Function[];
 if (services.length !== handles.length)
   throw new Error("IPC not setup properly");
 
-export type electronAPI = typeof apis;
+export type electronAPI = typeof apis & {
+  onBuildDockerContainer: (
+    listener: (event: Electron.IpcRendererEvent, stream: string[]) => void
+  ) => Electron.IpcRenderer;
+  removeonBuildDockerContainer: () => void;
+};
 
 export const exposes = services.map(({ channel }, index) => ({
   channel,

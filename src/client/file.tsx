@@ -7,6 +7,8 @@ export const File = () => {
   const [language, setLanguage] = useState("");
   const [framework, setFramework] = useState("");
   const [generate, setGenerate] = useState("");
+  const [buildStatus, setBuildStatus] = useState("");
+  const [logs, setLogs] = useState<string[]>([]);
 
   async function openFile() {
     const { canceled, path } = await window.electronAPI.selectDirectory();
@@ -34,6 +36,18 @@ export const File = () => {
     setGenerate("done");
   }
 
+  async function createContainer() {
+    console.log(window.electronAPI);
+    setBuildStatus("building");
+    window.electronAPI.removeonBuildDockerContainer();
+    window.electronAPI.onBuildDockerContainer((_, stream) => {
+      console.log(stream);
+      setLogs(stream);
+    });
+    await window.electronAPI.buildDockerImage(name);
+    setBuildStatus("Done");
+  }
+
   return (
     <div>
       <div>
@@ -51,6 +65,13 @@ export const File = () => {
       <div>
         <button onClick={generateDockerfile}>Generate Dockerfile</button>
         <div>{generate}</div>
+      </div>
+      <div>
+        <button onClick={createContainer}>Create Docker Container</button>
+        <div>{buildStatus}</div>
+        {logs.map((log) => (
+          <div>{log}</div>
+        ))}
       </div>
       <div>
         {fileMetas.map(({ name, isDirectory }) => (

@@ -1,3 +1,4 @@
+import { BrowserWindow } from "electron";
 import { LanguageSignature, FrameworkSignature } from "../lib/Identifier";
 
 export function getState() {
@@ -9,6 +10,7 @@ export class SharedState {
 
   language: LanguageSignature;
   framework: FrameworkSignature;
+  mainWindow: BrowserWindow;
 
   public static getInstance(): SharedState {
     if (!SharedState.instance) {
