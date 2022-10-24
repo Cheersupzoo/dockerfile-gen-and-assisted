@@ -48,6 +48,10 @@ export const File = () => {
     setBuildStatus("Done");
   }
 
+  async function runContainer() {
+    window.electronAPI.runContainer(name);
+  }
+
   return (
     <div>
       <div>
@@ -72,6 +76,9 @@ export const File = () => {
         {logs.map((log) => (
           <div>{log}</div>
         ))}
+      </div>
+      <div>
+        <button onClick={runContainer}>Run Docker Container</button>
       </div>
       <div>
         {fileMetas.map(({ name, isDirectory }) => (

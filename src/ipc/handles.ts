@@ -2,7 +2,7 @@ import { getLanguageAndFramework } from "../lib/Identifier";
 import { services } from ".";
 import { selectDirectory, scanDirectory } from "../lib/DirScanner";
 import { generateDockerfile } from "../lib/Generator";
-import { buildDockerImage } from "../lib/Docker";
+import { buildDockerImage, runContainer } from "../lib/Docker";
 
 const apis = {
   scanDirectory,
@@ -10,6 +10,7 @@ const apis = {
   getLanguageAndFramework,
   generateDockerfile,
   buildDockerImage,
+  runContainer,
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-types

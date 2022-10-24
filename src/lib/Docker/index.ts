@@ -12,8 +12,6 @@ export async function buildDockerImage(path: string) {
   if (!isDockerfileExist(path)) return;
 
   const folder = Path.basename(path);
-  console.log(path);
-  console.log(folder);
   const docker = new Docker();
   const state = getState();
 
@@ -24,7 +22,6 @@ export async function buildDockerImage(path: string) {
       (err, res) => {
         const logs = Array<string>();
         res.setEncoding("utf8");
-        //   res.pipe(process.stdout);
         docker.modem.followProgress(res, (err, res) =>
           err ? reject(err) : resolve(res)
         );
@@ -35,7 +32,6 @@ export async function buildDockerImage(path: string) {
             .filter((item) => item.length !== 0)
             .forEach((item) => {
               const stream = JSON.parse(item).stream;
-              console.log(stream);
               logs.push(stream);
               state.mainWindow.webContents.send(ON_DOCKER_BUILD, logs);
             });
@@ -43,4 +39,41 @@ export async function buildDockerImage(path: string) {
       }
     );
   });
+}
+
+export async function runContainer(path: string) {
+  if (!isDockerfileExist(path)) return;
+
+  const folder = Path.basename(path);
+  const docker = new Docker();
+  const container = docker.getContainer(folder);
+  try {
+    await container.stop();
+    await container.remove();
+  } catch (error) {
+    console.error(error);
+  }
+  docker.run(
+    folder,
+    [],
+    [],
+    {
+      name: folder,
+      HostConfig: {
+        PortBindings: {
+          "80/tcp": [
+            {
+              HostIp: "0.0.0.0",
+              HostPort: "8080",
+            },
+          ],
+        },
+      },
+    },
+    {},
+    (err, data) => {
+      console.log(`err ${err}`);
+      console.log(data);
+    }
+  );
 }
