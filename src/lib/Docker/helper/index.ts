@@ -1,7 +1,12 @@
 import fs from "fs";
+import Path from "path";
 
 export function isDockerfileExist(path: string) {
   return fs.existsSync(`${path}/Dockerfile`);
+}
+
+export function getBasedName(path: string){
+    return Path.basename(path);
 }
 
 export function getPorts(path: string): string[] {

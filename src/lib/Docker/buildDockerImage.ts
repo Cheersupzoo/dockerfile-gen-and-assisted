@@ -1,15 +1,13 @@
-
 import Docker from "dockerode";
-import Path from "path";
+
 import { getState } from "../../state";
 import { ON_DOCKER_BUILD } from "../../ipc";
-import { isDockerfileExist } from "./helper";
-
+import { getBasedName, isDockerfileExist } from "./helper";
 
 export async function buildDockerImage(path: string) {
   if (!isDockerfileExist(path)) return;
 
-  const folder = Path.basename(path);
+  const folder = getBasedName(path);
   const docker = new Docker();
   const state = getState();
 

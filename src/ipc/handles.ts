@@ -3,6 +3,7 @@ import { services } from ".";
 import { selectDirectory, scanDirectory } from "../lib/DirScanner";
 import { generateDockerfile } from "../lib/Generator";
 import { buildDockerImage, runContainer } from "../lib/Docker";
+import { inspectContainer } from "../lib/Docker/inspectContainer";
 
 const apis = {
   scanDirectory,
@@ -11,6 +12,7 @@ const apis = {
   generateDockerfile,
   buildDockerImage,
   runContainer,
+  inspectContainer,
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-types

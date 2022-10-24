@@ -1,11 +1,10 @@
 import Docker from "dockerode";
-import Path from "path";
-import { getPorts, isDockerfileExist } from "./helper";
+import { getBasedName, getPorts, isDockerfileExist } from "./helper";
 
 export async function runContainer(path: string) {
   if (!isDockerfileExist(path)) return;
 
-  const folder = Path.basename(path);
+  const folder = getBasedName(path);
   const ports = getPorts(path);
   const PortBindings = ports.reduce(
     (prev, port, index) => ({
