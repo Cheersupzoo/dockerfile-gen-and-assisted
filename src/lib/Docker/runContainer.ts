@@ -1,11 +1,24 @@
 import Docker from "dockerode";
 import Path from "path";
-import { isDockerfileExist } from "./helper";
+import { getPorts, isDockerfileExist } from "./helper";
 
 export async function runContainer(path: string) {
   if (!isDockerfileExist(path)) return;
 
   const folder = Path.basename(path);
+  const ports = getPorts(path);
+  const PortBindings = ports.reduce(
+    (prev, port, index) => ({
+      ...prev,
+      [`${port}/tcp`]: [
+        {
+          HostIp: "0.0.0.0",
+          HostPort: `${8080 + index}`,
+        },
+      ],
+    }),
+    {}
+  );
   const docker = new Docker();
   const container = docker.getContainer(folder);
   try {
@@ -21,14 +34,7 @@ export async function runContainer(path: string) {
     {
       name: folder,
       HostConfig: {
-        PortBindings: {
-          "80/tcp": [
-            {
-              HostIp: "0.0.0.0",
-              HostPort: "8080",
-            },
-          ],
-        },
+        PortBindings,
       },
     },
     {},
