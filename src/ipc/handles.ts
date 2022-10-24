@@ -1,13 +1,13 @@
 import { getLanguageAndFramework } from "../lib/Identifier";
 import { services } from ".";
 import { selectDirectory, scanDirectory } from "../lib/DirScanner";
-import { generateDockerFile } from "../lib/Generator";
+import { generateDockerfile } from "../lib/Generator";
 
 const apis = {
   scanDirectory,
   selectDirectory,
   getLanguageAndFramework,
-  generateDockerFile,
+  generateDockerfile,
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-types

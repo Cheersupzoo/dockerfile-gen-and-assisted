@@ -1,3 +1,4 @@
+import { getState } from "../../state";
 import { FileMeta } from "../DirScanner/type/fileMeta";
 import { FrameworkSignature } from "./frameworkSignature/FrameworkSignature";
 import {
@@ -43,5 +44,13 @@ export async function getLanguageAndFramework(path: string, files: FileMeta[]) {
   const identifier = new Identifier(path, files);
   const language = identifier.getLanguageSignature();
   const framework = identifier.getFrameworkSignature(language);
-  return { language: language?.language ?? "unknown", framework: framework?.framework ?? "" };
+
+  const state = getState();
+  state.language = language;
+  state.framework = framework;
+
+  return {
+    language: language?.language ?? "unknown",
+    framework: framework?.framework ?? "",
+  };
 }

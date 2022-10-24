@@ -6,6 +6,7 @@ export const File = () => {
   const [fileMetas, setFileMetas] = useState<FileMeta[]>([]);
   const [language, setLanguage] = useState("");
   const [framework, setFramework] = useState("");
+  const [generate, setGenerate] = useState("");
 
   async function openFile() {
     const { canceled, path } = await window.electronAPI.selectDirectory();
@@ -25,6 +26,14 @@ export const File = () => {
     setFramework(framework);
   }
 
+  async function generateDockerfile() {
+    setGenerate("");
+    if (!framework) return;
+    setGenerate("Start");
+    await window.electronAPI.generateDockerfile(name);
+    setGenerate("done");
+  }
+
   return (
     <div>
       <div>
@@ -38,6 +47,10 @@ export const File = () => {
         <div>
           {language}: {framework}
         </div>
+      </div>
+      <div>
+        <button onClick={generateDockerfile}>Generate Dockerfile</button>
+        <div>{generate}</div>
       </div>
       <div>
         {fileMetas.map(({ name, isDirectory }) => (
