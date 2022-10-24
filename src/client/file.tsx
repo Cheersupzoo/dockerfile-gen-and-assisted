@@ -9,6 +9,7 @@ export const File = () => {
   const [generate, setGenerate] = useState("");
   const [buildStatus, setBuildStatus] = useState("");
   const [logs, setLogs] = useState<string[]>([]);
+  const [containerStatus, setContainerStatus] = useState("");
 
   async function openFile() {
     const { canceled, path } = await window.electronAPI.selectDirectory();
@@ -52,6 +53,16 @@ export const File = () => {
     window.electronAPI.runContainer(name);
   }
 
+  async function inspectContainer() {
+    const container = await window.electronAPI.inspectContainer(name);
+    console.log(container);
+    setContainerStatus(container.State.Status);
+  }
+
+  async function stopContainer() {
+    await window.electronAPI.stopContainer(name);
+  }
+
   return (
     <div>
       <div>
@@ -79,6 +90,11 @@ export const File = () => {
       </div>
       <div>
         <button onClick={runContainer}>Run Docker Container</button>
+      </div>
+      <div>
+        <button onClick={inspectContainer}>Inspect Docker Container</button>
+        <button onClick={stopContainer}>Stop Docker Container</button>
+        <div>{containerStatus}</div>
       </div>
       <div>
         {fileMetas.map(({ name, isDirectory }) => (
