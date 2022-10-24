@@ -2,8 +2,12 @@ import { getLanguageAndFramework } from "../lib/Identifier";
 import { services } from ".";
 import { selectDirectory, scanDirectory } from "../lib/DirScanner";
 import { generateDockerfile } from "../lib/Generator";
-import { buildDockerImage, runContainer } from "../lib/Docker";
-import { inspectContainer } from "../lib/Docker/inspectContainer";
+import {
+  buildDockerImage,
+  inspectContainer,
+  runContainer,
+  stopContainer,
+} from "../lib/Docker";
 
 const apis = {
   scanDirectory,
@@ -13,6 +17,7 @@ const apis = {
   buildDockerImage,
   runContainer,
   inspectContainer,
+  stopContainer,
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-types

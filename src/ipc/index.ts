@@ -13,6 +13,7 @@ export const services: { name: string; channel: string }[] = [
   { name: "buildDockerImage", channel: "dialog:buildDockerImage" },
   { name: "runContainer", channel: "dialog:runContainer" },
   { name: "inspectContainer", channel: "dialog:inspectContainer" },
+  { name: "stopContainer", channel: "dialog:stopContainer" },
 ];
 export const stream: { name: string; channel: string }[] = [
   { name: "onBuildDockerContainer", channel: ON_DOCKER_BUILD },
