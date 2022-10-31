@@ -20,27 +20,28 @@ export async function runContainer(path: string) {
   );
   const docker = new Docker();
   const container = docker.getContainer(folder);
-  try {
-    await container.remove();
-  } catch (error) {
-    await container.stop();
-    await container.remove();
-    console.error(error);
-  }
-  docker.run(
-    folder,
-    [],
-    [],
-    {
-      name: folder,
-      HostConfig: {
-        PortBindings,
+  let containerExist = true;
+
+  await container.inspect().catch(() => (containerExist = false));
+
+  if (containerExist) {
+    container.start();
+  } else {
+    docker.run(
+      folder,
+      [],
+      [],
+      {
+        name: folder,
+        HostConfig: {
+          PortBindings,
+        },
       },
-    },
-    {},
-    (err, data) => {
-      console.log(`err ${err}`);
-      console.log(data);
-    }
-  );
+      {},
+      (err, data) => {
+        console.log(`err ${err}`);
+        console.log(data);
+      }
+    );
+  }
 }
