@@ -63,6 +63,24 @@ export const File = () => {
     await window.electronAPI.stopContainer(name);
   }
 
+  async function listenContainer() {
+    await window.electronAPI.listenContainer(name);
+  }
+
+  async function changesContainer() {
+    window.electronAPI.onStatusChangesStream(async (_, stream) => {
+      console.log(stream);
+      // console.log();
+      // if((stream as any)?.from === name) {
+      // console.log('inspect');
+
+      await inspectContainer();
+      // }
+
+      // setLogs(stream);
+    });
+    await window.electronAPI.onStatusChanges(name);
+  }
   return (
     <div>
       <div>
@@ -94,6 +112,8 @@ export const File = () => {
       <div>
         <button onClick={inspectContainer}>Inspect Docker Container</button>
         <button onClick={stopContainer}>Stop Docker Container</button>
+        <button onClick={listenContainer}>Listen Docker Container</button>
+        <button onClick={changesContainer}>Change Docker Container</button>
         <div>{containerStatus}</div>
       </div>
       <div>

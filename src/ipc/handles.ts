@@ -4,7 +4,9 @@ import { selectDirectory, scanDirectory } from "../lib/DirScanner";
 import { generateDockerfile } from "../lib/Generator";
 import {
   buildDockerImage,
+  onStatusChanges,
   inspectContainer,
+  listenContainer,
   removeContainer,
   runContainer,
   stopContainer,
@@ -20,6 +22,8 @@ const apis = {
   inspectContainer,
   stopContainer,
   removeContainer,
+  listenContainer,
+  onStatusChanges,
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -33,6 +37,10 @@ export type electronAPI = typeof apis & {
     listener: (event: Electron.IpcRendererEvent, stream: string[]) => void
   ) => Electron.IpcRenderer;
   removeonBuildDockerContainer: () => void;
+  onStatusChangesStream: (
+    listener: (event: Electron.IpcRendererEvent, stream: object) => void
+  ) => Electron.IpcRenderer;
+  removeonStatusChangesStream: () => void;
 };
 
 export const exposes = services.map(({ channel }, index) => ({

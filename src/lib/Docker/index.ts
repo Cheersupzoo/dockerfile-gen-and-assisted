@@ -4,3 +4,5 @@ export * from "./helper";
 export * from "./inspectContainer";
 export * from "./stopContainer";
 export * from "./removeContainer";
+export * from "./listenContainer"
+export * from "./onStatusChanges"

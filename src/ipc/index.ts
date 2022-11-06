@@ -1,6 +1,7 @@
 import { ipcRenderer } from "electron";
 
 export const ON_DOCKER_BUILD = 'dialog:onBuildDockerContainer'
+export const ON_STATUS_CHANGE = 'dialog:onStatusChanges'
 
 export const services: { name: string; channel: string }[] = [
   { name: "scanDirectory", channel: "dir:scanDirectory" },
@@ -15,9 +16,12 @@ export const services: { name: string; channel: string }[] = [
   { name: "inspectContainer", channel: "dialog:inspectContainer" },
   { name: "stopContainer", channel: "dialog:stopContainer" },
   { name: "removeContainer", channel: "dialog:removeContainer" },
+  { name: "listenContainer", channel: "dialog:listenContainer" },
+  { name: "onStatusChanges", channel: "dialog:onStatusChanges" },
 ];
 export const stream: { name: string; channel: string }[] = [
   { name: "onBuildDockerContainer", channel: ON_DOCKER_BUILD },
+  { name: "onStatusChangesStream", channel: ON_STATUS_CHANGE },
 ];
 
 export const ipcs = services.reduce(
