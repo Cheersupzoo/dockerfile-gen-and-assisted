@@ -10,10 +10,12 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:import/recommended",
     "plugin:import/electron",
-    "plugin:import/typescript"
+    "plugin:import/typescript",
+    "plugin:tailwindcss/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "rules": {
     "@typescript-eslint/ban-ts-comment": "warn"
-  }
+  },
+  "plugins": ["tailwindcss"]
 }

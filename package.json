@@ -95,6 +95,7 @@
   "dependencies": {
     "dockerode": "^3.3.4",
     "electron-squirrel-startup": "^1.0.0",
+    "eslint-plugin-tailwindcss": "^3.6.2",
     "fast-glob": "^3.2.12",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
