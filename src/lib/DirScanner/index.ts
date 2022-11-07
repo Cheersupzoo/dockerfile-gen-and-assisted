@@ -1,11 +1,16 @@
 import { dialog } from "electron";
 import fs from "fs/promises";
+import { getState } from "../../state";
 import { FileMeta } from "./type/fileMeta";
 
 export async function selectDirectory() {
-  const { canceled, filePaths } = await dialog.showOpenDialog({
-    properties: ["openDirectory"],
-  });
+  const state = getState();
+  const { canceled, filePaths } = await dialog.showOpenDialog(
+    state.mainWindow,
+    {
+      properties: ["openDirectory"],
+    }
+  );
   return { canceled, path: filePaths[0] };
 }
 
