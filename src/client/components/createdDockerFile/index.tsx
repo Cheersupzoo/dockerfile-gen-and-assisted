@@ -13,7 +13,7 @@ export const CreatedDockerFile = () => {
           <RiHammerFill className="absolute bottom-0 left-0 rotate-45 text-[60px] text-gray-800 opacity-70" />
         </div>
       </div>
-      <div className="mt-4 text-center">Finish!</div>
+      <div className="mt-4 text-center font-bold">Finish!</div>
       <div className="mt-6 flex justify-center">
         <button
           onClick={openPath}
