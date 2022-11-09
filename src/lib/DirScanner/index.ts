@@ -1,4 +1,4 @@
-import { dialog } from "electron";
+import { dialog, shell } from "electron";
 import fs from "fs/promises";
 import { getState } from "../../state";
 import { FileMeta } from "./type/fileMeta";
@@ -21,4 +21,8 @@ export async function scanDirectory(path: string): Promise<FileMeta[]> {
     name: file.name,
     isDirectory: file.isDirectory(),
   }));
+}
+
+export function openPath(path: string) {
+  shell.openPath(path);
 }

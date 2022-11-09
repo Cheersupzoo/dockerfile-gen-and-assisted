@@ -1,6 +1,6 @@
 import { getLanguageAndFramework } from "../lib/Identifier";
 import { services } from ".";
-import { selectDirectory, scanDirectory } from "../lib/DirScanner";
+import { selectDirectory, scanDirectory, openPath } from "../lib/DirScanner";
 import { generateDockerfile } from "../lib/Generator";
 import {
   buildDockerImage,
@@ -24,6 +24,7 @@ const apis = {
   removeContainer,
   listenContainer,
   onStatusChanges,
+  openPath,
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-types

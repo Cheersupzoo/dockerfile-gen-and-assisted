@@ -18,6 +18,7 @@ export const services: { name: string; channel: string }[] = [
   { name: "removeContainer", channel: "dialog:removeContainer" },
   { name: "listenContainer", channel: "dialog:listenContainer" },
   { name: "onStatusChanges", channel: "dialog:onStatusChanges" },
+  { name: "openPath", channel: "dialog:openPath" },
 ];
 export const stream: { name: string; channel: string }[] = [
   { name: "onBuildDockerContainer", channel: ON_DOCKER_BUILD },
