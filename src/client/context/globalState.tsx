@@ -22,7 +22,7 @@ export type DetectDockerFileState = {
 };
 
 export const GlobalStateProvider = ({ children }: any) => {
-  const [appState, setAppState] = useState<AppState>("runLocally");
+  const [appState, setAppState] = useState<AppState>("selectFolder");
   const [detectState, setDetectState] = useState<DetectDockerFileState>({
     folderPath: "",
   });
