@@ -3,7 +3,7 @@ import { FaDocker } from "react-icons/fa";
 import { RiFile3Line, RiHammerFill } from "react-icons/ri";
 import { useGlobalState } from "../../context/globalState";
 export const CreatedDockerFile = () => {
-  const { openPath } = useGlobalState();
+  const { openPath, setAppState } = useGlobalState();
   return (
     <div>
       <div className="flex justify-center">
@@ -24,7 +24,7 @@ export const CreatedDockerFile = () => {
       </div>
       <div className="text-center  text-sm">or</div>
       <div className="flex justify-center">
-        <button className="h-12 w-64 rounded-3xl bg-[#367AF6] text-gray-50 transition-colors hover:bg-[#31c763] ">
+        <button onClick={() => setAppState('createDockerFile')} className="h-12 w-64 rounded-3xl bg-[#367AF6] text-gray-50 transition-colors hover:bg-[#31c763] ">
           Run locally
         </button>
       </div>

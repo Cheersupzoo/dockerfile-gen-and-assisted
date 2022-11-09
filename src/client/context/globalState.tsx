@@ -2,7 +2,7 @@ import React, { createContext, useContext, useRef, useState } from "react";
 import { useDetectFileState } from "./useDetectFileState";
 import { useSelectFolder } from "./useSelectFolder";
 
-type AppState = "selectFolder" | "detectDockerFile" | "createDockerFile";
+type AppState = "selectFolder" | "detectDockerFile" | "createDockerFile" | "runLocally";
 
 const GlobalContext = createContext<{
   appState?: AppState;
@@ -22,7 +22,7 @@ export type DetectDockerFileState = {
 };
 
 export const GlobalStateProvider = ({ children }: any) => {
-  const [appState, setAppState] = useState<AppState>("selectFolder");
+  const [appState, setAppState] = useState<AppState>("runLocally");
   const [detectState, setDetectState] = useState<DetectDockerFileState>({
     folderPath: "",
   });
