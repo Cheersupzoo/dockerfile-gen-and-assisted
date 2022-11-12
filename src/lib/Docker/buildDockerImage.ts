@@ -28,8 +28,13 @@ export async function buildDockerImage(path: string) {
             .filter((item) => item.length !== 0)
             .forEach((item) => {
               const stream = JSON.parse(item).stream;
+              if (!stream) return;
+
               logs.push(stream);
-              state.mainWindow.webContents.send(ON_DOCKER_BUILD, logs);
+              state.mainWindow.webContents.send(
+                ON_DOCKER_BUILD,
+                logs.filter((log) => log !== "\n")
+              );
             });
         });
       }

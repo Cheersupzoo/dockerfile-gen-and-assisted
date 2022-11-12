@@ -1,8 +1,13 @@
-import React, { createContext, useContext, useRef, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { useDetectFileState } from "./useDetectFileState";
+import { useRunLocally } from "./useRunLocally";
 import { useSelectFolder } from "./useSelectFolder";
 
-type AppState = "selectFolder" | "detectDockerFile" | "createDockerFile" | "runLocally";
+type AppState =
+  | "selectFolder"
+  | "detectDockerFile"
+  | "createDockerFile"
+  | "runLocally";
 
 const GlobalContext = createContext<{
   appState?: AppState;
@@ -11,6 +16,7 @@ const GlobalContext = createContext<{
   detectState?: DetectDockerFileState;
   detectFile?: ReturnType<typeof useDetectFileState>;
   openPath?: () => void;
+  runLocally?: ReturnType<typeof useRunLocally>;
 }>({});
 
 export type SetAppState = React.Dispatch<React.SetStateAction<AppState>>;
@@ -28,6 +34,7 @@ export const GlobalStateProvider = ({ children }: any) => {
   });
   const selectFolder = useSelectFolder(setDetectState, setAppState);
   const detectFile = useDetectFileState(setAppState, detectState);
+  const runLocally = useRunLocally(setAppState, detectState);
   const openPath = () => window.electronAPI.openPath(detectState.folderPath);
 
   const globalState = {
@@ -37,6 +44,7 @@ export const GlobalStateProvider = ({ children }: any) => {
     detectState,
     detectFile,
     openPath,
+    runLocally,
   };
   return (
     <GlobalContext.Provider value={globalState}>
