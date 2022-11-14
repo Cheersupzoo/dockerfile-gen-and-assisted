@@ -11,16 +11,24 @@ import {
 export * from "./frameworkSignature";
 export * from "./languageSignature";
 
+export const languageSignatures = [
+  new JavascriptSignature(),
+  new JavaSignature(),
+  new PythonSignature(),
+];
+
+export const languageList = async () =>
+  languageSignatures.map((sig) => sig.language);
+
+export const frameworkList = async (language: string) =>
+  languageSignatures
+    .find((sig) => sig.language === language)
+    .frameworks.map((sig) => sig.framework);
+
 export class Identifier {
   constructor(private path: string, private files: FileMeta[]) {}
 
   getLanguageSignature(): LanguageSignature {
-    const languageSignatures = [
-      new JavascriptSignature(),
-      new JavaSignature(),
-      new PythonSignature(),
-    ];
-
     return (
       languageSignatures.find((lSignature) =>
         lSignature.checkLanguage(this.files)
@@ -50,7 +58,7 @@ export async function getLanguageAndFramework(path: string, files: FileMeta[]) {
   state.framework = framework;
 
   return {
-    language: language?.language ?? "unknown",
+    language: language?.language ?? "",
     framework: framework?.framework ?? "",
   };
 }

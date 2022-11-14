@@ -33,7 +33,11 @@ export const GlobalStateProvider = ({ children }: any) => {
     folderPath: "",
   });
   const selectFolder = useSelectFolder(setDetectState, setAppState);
-  const detectFile = useDetectFileState(setAppState, detectState);
+  const detectFile = useDetectFileState(
+    setAppState,
+    detectState,
+    setDetectState
+  );
   const runLocally = useRunLocally(setAppState, detectState);
   const openPath = () => window.electronAPI.openPath(detectState.folderPath);
 

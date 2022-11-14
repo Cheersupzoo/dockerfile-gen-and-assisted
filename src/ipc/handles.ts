@@ -1,4 +1,8 @@
-import { getLanguageAndFramework } from "../lib/Identifier";
+import {
+  frameworkList,
+  getLanguageAndFramework,
+  languageList,
+} from "../lib/Identifier";
 import { services } from ".";
 import { selectDirectory, scanDirectory, openPath } from "../lib/DirScanner";
 import { generateDockerfile } from "../lib/Generator";
@@ -25,6 +29,8 @@ const apis = {
   listenContainer,
   onStatusChanges,
   openPath,
+  languageList,
+  frameworkList,
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-types

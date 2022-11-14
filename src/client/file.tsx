@@ -33,7 +33,7 @@ export const File = () => {
     setGenerate("");
     if (!framework) return;
     setGenerate("Start");
-    await window.electronAPI.generateDockerfile(name);
+    // await window.electronAPI.generateDockerfile(name);
     setGenerate("done");
   }
 

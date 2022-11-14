@@ -1,7 +1,8 @@
 import { ipcRenderer } from "electron";
+// import { languageList } from "../lib/Identifier";
 
-export const ON_DOCKER_BUILD = 'dialog:onBuildDockerContainer'
-export const ON_STATUS_CHANGE = 'dialog:onStatusChanges'
+export const ON_DOCKER_BUILD = "dialog:onBuildDockerContainer";
+export const ON_STATUS_CHANGE = "dialog:onStatusChanges";
 
 export const services: { name: string; channel: string }[] = [
   { name: "scanDirectory", channel: "dir:scanDirectory" },
@@ -19,6 +20,8 @@ export const services: { name: string; channel: string }[] = [
   { name: "listenContainer", channel: "dialog:listenContainer" },
   { name: "onStatusChanges", channel: "dialog:onStatusChanges" },
   { name: "openPath", channel: "dialog:openPath" },
+  { name: "languageList", channel: "dialog:languageList" },
+  { name: "frameworkList", channel: "dialog:frameworkList" },
 ];
 export const stream: { name: string; channel: string }[] = [
   { name: "onBuildDockerContainer", channel: ON_DOCKER_BUILD },
@@ -34,14 +37,20 @@ export const ipcs = services.reduce(
 );
 
 export const ipcsOn = {
-  ...stream.reduce((pre, cur) => ({
-    ...pre,
-    [cur.name]: (
-      listener: (event: Electron.IpcRendererEvent, ...args: unknown[]) => void
-    ) => ipcRenderer.on(cur.channel, listener),
-  }),{}),
-  ...stream.reduce((pre, cur) => ({
-    ...pre,
-    [`remove${cur.name}`]: () => ipcRenderer.removeAllListeners(cur.channel),
-  }),{}),
+  ...stream.reduce(
+    (pre, cur) => ({
+      ...pre,
+      [cur.name]: (
+        listener: (event: Electron.IpcRendererEvent, ...args: unknown[]) => void
+      ) => ipcRenderer.on(cur.channel, listener),
+    }),
+    {}
+  ),
+  ...stream.reduce(
+    (pre, cur) => ({
+      ...pre,
+      [`remove${cur.name}`]: () => ipcRenderer.removeAllListeners(cur.channel),
+    }),
+    {}
+  ),
 };
