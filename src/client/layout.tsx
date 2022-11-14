@@ -20,13 +20,15 @@ export const Layout = () => {
       {appState === "runLocally" && <RunLocally />}
       {/* <File /> */}
 
-      <div
-        className="group absolute bottom-6 right-6 flex cursor-pointer"
-        onClick={restart}
-      >
-        <SlReload className="rotate-90 text-3xl transition-transform group-hover:-rotate-3" />
-        <div className="ml-2">Restart</div>
-      </div>
+      {appState !== "selectFolder" && (
+        <div
+          className="group absolute bottom-6 right-6 flex cursor-pointer"
+          onClick={restart}
+        >
+          <SlReload className="rotate-90 text-3xl transition-transform group-hover:-rotate-3" />
+          <div className="ml-2">Restart</div>
+        </div>
+      )}
     </>
   );
 };
