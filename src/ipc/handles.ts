@@ -14,6 +14,8 @@ import {
   removeContainer,
   runContainer,
   stopContainer,
+  isImageExist,
+  getContainerStats,
 } from "../lib/Docker";
 import { isDockerfileExist } from "../lib/Docker/isDockerfileExist";
 
@@ -33,6 +35,8 @@ const apis = {
   languageList,
   frameworkList,
   isDockerfileExist,
+  isImageExist,
+  getContainerStats,
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-types

@@ -20,7 +20,6 @@ export async function onStatusChanges(path: string) {
   stream.setEncoding("utf8");
   stream.addListener("data", (event) => {
     const logs = JSON.parse(event);
-    console.log(logs);
     if ((logs as any)?.from === folder) {
       state.mainWindow.webContents.send(ON_STATUS_CHANGE, logs);
     }
