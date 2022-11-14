@@ -1,6 +1,7 @@
 import React from "react";
 import { RiFolderOpenLine } from "react-icons/ri";
 import { useGlobalState } from "../../context/globalState";
+import ExistDockerfile from "./existDockerfile";
 
 export const SelectFolder = () => {
   const { selectFolder } = useGlobalState();
@@ -12,7 +13,7 @@ export const SelectFolder = () => {
       <div className="mt-8">
         <RiFolderOpenLine className="mx-auto text-[120px] text-gray-600" />
       </div>
-      <div className="flex justify-center mt-6">
+      <div className="mt-6 flex justify-center">
         <button
           onClick={() => selectFolder.openFolder()}
           className="h-12 w-64 rounded-3xl bg-[#41F17D] text-gray-50 transition-colors hover:bg-[#31c763] "
@@ -25,6 +26,10 @@ export const SelectFolder = () => {
         located a file that is metadata about the project. Ex. package.json for
         Node.JS, requirement.txt for python.
       </div>
+      <ExistDockerfile
+        isOpen={selectFolder.isExistModalOpen}
+        closeModal={() => selectFolder.setIsExistModalOpen(false)}
+      />
     </div>
   );
 };

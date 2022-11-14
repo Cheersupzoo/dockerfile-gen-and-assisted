@@ -15,6 +15,7 @@ import {
   runContainer,
   stopContainer,
 } from "../lib/Docker";
+import { isDockerfileExist } from "../lib/Docker/isDockerfileExist";
 
 const apis = {
   scanDirectory,
@@ -31,6 +32,7 @@ const apis = {
   openPath,
   languageList,
   frameworkList,
+  isDockerfileExist,
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-types

@@ -22,6 +22,7 @@ export const services: { name: string; channel: string }[] = [
   { name: "openPath", channel: "dialog:openPath" },
   { name: "languageList", channel: "dialog:languageList" },
   { name: "frameworkList", channel: "dialog:frameworkList" },
+  { name: "isDockerfileExist", channel: "dialog:isDockerfileExist" },
 ];
 export const stream: { name: string; channel: string }[] = [
   { name: "onBuildDockerContainer", channel: ON_DOCKER_BUILD },
