@@ -26,7 +26,7 @@ export const CreatedDockerFile = () => {
       <div className="mt-4 flex justify-center">
         <button
           onClick={() => setAppState("runLocally")}
-          className="h-12 w-64 rounded-3xl bg-[#367AF6] text-gray-50 transition-colors hover:bg-[#31c763] "
+          className="h-12 w-64 rounded-3xl bg-[#367AF6] text-gray-50 transition-colors hover:bg-[#2159c1] "
         >
           Run locally
         </button>
