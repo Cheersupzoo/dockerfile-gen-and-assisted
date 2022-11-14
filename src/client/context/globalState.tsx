@@ -17,6 +17,7 @@ const GlobalContext = createContext<{
   detectFile?: ReturnType<typeof useDetectFileState>;
   openPath?: () => void;
   runLocally?: ReturnType<typeof useRunLocally>;
+  restart?: () => void;
 }>({});
 
 export type SetAppState = React.Dispatch<React.SetStateAction<AppState>>;
@@ -40,6 +41,7 @@ export const GlobalStateProvider = ({ children }: any) => {
   );
   const runLocally = useRunLocally(setAppState, detectState);
   const openPath = () => window.electronAPI.openPath(detectState.folderPath);
+  const restart = () => setAppState("selectFolder");
 
   const globalState = {
     appState,
@@ -49,6 +51,7 @@ export const GlobalStateProvider = ({ children }: any) => {
     detectFile,
     openPath,
     runLocally,
+    restart,
   };
   return (
     <GlobalContext.Provider value={globalState}>
