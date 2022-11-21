@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { FcPackage, FcSettings } from "react-icons/fc";
 import { IoPlaySharp, IoStop } from "react-icons/io5";
 import { useGlobalState } from "../../context/globalState";
+import { MaximizeLog } from "./maximizeLog";
 
 const Status = ({
   title,
@@ -95,13 +96,16 @@ export const RunLocally = () => {
               return <span className="text-xs text-[#fdf62d]">●</span>;
             }}
           />
-          <div
-            className="mt-1 h-16 w-56 overflow-y-scroll bg-gray-600 text-gray-100"
-            ref={logsRef}
-          >
-            {logs.map((log) => (
-              <div key={log}>{log}</div>
-            ))}
+          <div className="relative">
+            <div
+              className="mt-1 h-16 w-56 overflow-y-scroll bg-gray-600 text-gray-100"
+              ref={logsRef}
+            >
+              {logs.map((log) => (
+                <div key={log}>{log}</div>
+              ))}
+            </div>
+            <MaximizeLog />
           </div>
         </div>
       </div>
@@ -122,8 +126,6 @@ function RunningDockerImage() {
       containerStats,
     },
   } = useGlobalState();
-
-  console.log(containerStatus);
 
   return (
     <div
