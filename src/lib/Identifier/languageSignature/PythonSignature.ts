@@ -1,10 +1,11 @@
 import fg from "fast-glob";
 import { Language, LanguageSignature } from ".";
 import { FileMeta } from "../../../lib/DirScanner/type/fileMeta";
+import { pythonFramework } from "../frameworkSignature";
 import { FrameworkSignature } from "../frameworkSignature/FrameworkSignature";
 export class PythonSignature implements LanguageSignature {
   language: Language = "python";
-  frameworks: FrameworkSignature[] = [];
+  frameworks: FrameworkSignature[] = pythonFramework;
   checkLanguage(files: FileMeta[]) {
     const requirementTxt = files.find(
       (files) => files.name === "requirements.txt"
